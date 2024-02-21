@@ -1,4 +1,4 @@
-package com.sumerge.kafkaapp.config;
+package com.sumerge.kafkaapp.configuration.kafka;
 
 
 import org.apache.kafka.clients.admin.NewTopic;
@@ -10,8 +10,17 @@ import org.springframework.kafka.config.TopicBuilder;
 public class kafkaTopicConfig {
 
     @Bean
-    public NewTopic CreatedEmplTopic() {
+    public NewTopic createdEmplTopic() {
         return TopicBuilder.name("createdEmployee")
                 .build();
     }
+
+
+    @Bean
+    public NewTopic updatedEmplTopic() {
+        return TopicBuilder.name("updatedEmployee")
+                .build();
+    }
+
+
 }

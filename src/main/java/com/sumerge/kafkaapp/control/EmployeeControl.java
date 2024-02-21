@@ -1,37 +1,32 @@
-package com.sumerge.kafkaapp.service;
+package com.sumerge.kafkaapp.control;
 
 
 import com.sumerge.kafkaapp.entity.Employee;
 import com.sumerge.kafkaapp.repository.EmployeeRepository;
+import com.sumerge.kafkaapp.repository.SequenceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.kafka.annotation.KafkaListener;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
-import java.util.List;
 import java.util.Optional;
 
 import static com.sumerge.kafkaapp.entity.Employee.SEQUENCE_NAME;
 
-@Service
-public class EmployeeService {
+@Component
+public class EmployeeControl {
 
     private EmployeeRepository employeeRepository;
-    private SequenceGeneratorService seqGeneratorService;
+    private SequenceRepository sequenceRepository;
 
     @Autowired
-    public EmployeeService(EmployeeRepository employeeRepository, SequenceGeneratorService seqGeneratorService) {
+    public EmployeeControl(EmployeeRepository employeeRepository, SequenceRepository sequenceRepository) {
         this.employeeRepository = employeeRepository;
-        this.seqGeneratorService = seqGeneratorService;
+        this.sequenceRepository = sequenceRepository;
     }
 
-    public List<Employee> findAll()
-    {
-        return employeeRepository.findAll();
-    }
-    public Employee findById(int id)
-    {
-        Optional<Employee> result=employeeRepository.findById(id);
 
+
+    public Employee checkFindById(Optional<Employee> result)
+    {
         Employee theEmployee=null;
         if(result.isPresent())
         {
@@ -44,20 +39,20 @@ public class EmployeeService {
         }
     }
 
+    public void setEmployeeId(Employee employee)
+    {
+        employee.setId(sequenceRepository.getSequenceNumber(SEQUENCE_NAME));
+    }
 
-    @KafkaListener(topics="createdEmployee",groupId = "demoGroup")
     public void save(Employee employee)
     {
-        employee.setId(seqGeneratorService.getSequenceNumber(SEQUENCE_NAME));
+        setEmployeeId(employee);
         employeeRepository.save(employee);
     }
 
 
-
-
     public void update(Employee employee)
     {
-       Employee tempEmployee = findById(employee.getId());
        employeeRepository.save(employee);
     }
 

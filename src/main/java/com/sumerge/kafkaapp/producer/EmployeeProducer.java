@@ -1,4 +1,4 @@
-package com.sumerge.kafkaapp.controller;
+package com.sumerge.kafkaapp.producer;
 
 
 import com.sumerge.kafkaapp.entity.Employee;
@@ -8,9 +8,9 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.KafkaHeaders;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.MessageBuilder;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
-@Service
+@Component
 public class EmployeeProducer {
 
     private static final Logger LOGGER= LoggerFactory.getLogger(EmployeeProducer.class);
@@ -22,13 +22,13 @@ public class EmployeeProducer {
     }
 
 
-    public void sendMessage(Employee employee){
+    public void sendMessage(Employee employee,String topicName){
         LOGGER.info(String.format(" JSON Message send %s",employee.toString()));
 
 
         Message<Employee> message= MessageBuilder
                 .withPayload(employee)
-                .setHeader(KafkaHeaders.TOPIC,"createdEmployee")
+                .setHeader(KafkaHeaders.TOPIC,topicName)
                 .build();
 
         kafkaTemplate.send(message);

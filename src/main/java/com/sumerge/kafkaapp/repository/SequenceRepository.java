@@ -1,4 +1,4 @@
-package com.sumerge.kafkaapp.service;
+package com.sumerge.kafkaapp.repository;
 
 import com.sumerge.kafkaapp.entity.DbSequence;
 import lombok.Data;
@@ -7,22 +7,19 @@ import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.util.Objects;
 
 import static org.springframework.data.mongodb.core.FindAndModifyOptions.options;
-import static org.springframework.data.mongodb.core.query.Criteria.where;
-import static org.springframework.data.mongodb.core.query.Query.query;
 
-@Service
-@Data
-public class SequenceGeneratorService {
+@Component
+public class SequenceRepository {
 
     private MongoOperations mongoOperations;
 
     @Autowired
-    public SequenceGeneratorService(MongoOperations mongoOperations) {
+    public SequenceRepository(MongoOperations mongoOperations) {
         this.mongoOperations = mongoOperations;
     }
 

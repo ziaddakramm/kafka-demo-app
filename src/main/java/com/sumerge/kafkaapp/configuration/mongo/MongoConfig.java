@@ -1,4 +1,4 @@
-package com.sumerge.kafkaapp.config;
+package com.sumerge.kafkaapp.configuration.mongo;
 
 import com.mongodb.ConnectionString;
 import com.mongodb.MongoClientSettings;
@@ -8,15 +8,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.config.AbstractMongoClientConfiguration;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
-import java.util.Collection;
-import java.util.Collections;
-
 @Configuration
 @EnableMongoRepositories(basePackages = "com.sumerge.kafkaapp")
 
 public class MongoConfig extends AbstractMongoClientConfiguration {
 
-    //we didn’t need to define MongoTemplate bean in the previous configuration since it’s already defined in AbstractMongoClientConfiguration.
+    //no need to define MongoTemplate bean in the previous configuration since it’s already defined in AbstractMongoClientConfiguration.
     @Override
     protected String getDatabaseName() {
         return "test";
