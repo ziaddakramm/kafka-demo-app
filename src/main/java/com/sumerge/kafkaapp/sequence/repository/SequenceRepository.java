@@ -1,7 +1,6 @@
-package com.sumerge.kafkaapp.repository;
+package com.sumerge.kafkaapp.sequence.repository;
 
-import com.sumerge.kafkaapp.entity.DbSequence;
-import lombok.Data;
+import com.sumerge.kafkaapp.sequence.entity.DbSequence;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Criteria;

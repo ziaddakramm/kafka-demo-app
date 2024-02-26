@@ -1,6 +1,7 @@
-package com.sumerge.kafkaapp.entity;
+package com.sumerge.kafkaapp.employee.entity;
 
 
+import com.sumerge.kafkaapp.service.ObjectModel;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
@@ -9,7 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Data
 @Document(collection = "employee")
 
-public class Employee {
+public class Employee  {
 
     @Transient
     public static final String SEQUENCE_NAME="user_sequence";

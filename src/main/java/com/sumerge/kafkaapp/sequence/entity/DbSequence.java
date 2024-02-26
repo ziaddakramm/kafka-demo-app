@@ -1,4 +1,4 @@
-package com.sumerge.kafkaapp.entity;
+package com.sumerge.kafkaapp.sequence.entity;
 
 
 import lombok.AllArgsConstructor;
